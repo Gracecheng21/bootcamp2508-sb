@@ -1,0 +1,45 @@
+{
+  "name" : "K11",
+  "area" : 19000,
+  "cinema" : {
+      "name" : "Cinema A",
+      "openedDate" : "01-JAN-2022",
+      "releasedFilms" : [
+          {
+              "name" : "film A",
+              "releaseDate" : "01-Jan-2022"
+          },
+          {
+              "name" : "film B",
+              "releaseDate" : "02-Jan-2022"
+          }
+    ]
+  },
+    "shopCategory" : [
+        "Sport",
+        "Food",
+        "Clothing"
+    ]
+}
+
+@Getter
+public class Mall {
+  private String name;
+  private int area;
+  private Cinema cinema;
+  private List<String> shopCategory;
+
+  @Getter
+  public static class Cinema {
+    private String name;
+    private LocalDate openedDate;
+    private List<Film> releasedFilms;
+
+    @Getter
+    public static class Film {
+      private String name;
+      private LocalDate releaseDate;
+      }
+    }
+
+  }
