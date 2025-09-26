@@ -1,11 +1,9 @@
 package com.bootcamp.demo.demo_database.model;
 
 import com.bootcamp.demo.demo_database.model.User.Address.Company;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class User {
   private static Long counter = 0L;
 
@@ -40,5 +38,6 @@ public class User {
     }
 
   }
+
 
 }
