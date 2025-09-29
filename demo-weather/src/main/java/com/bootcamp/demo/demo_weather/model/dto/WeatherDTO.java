@@ -10,7 +10,7 @@ public class WeatherDTO {
   private String generalSituation;
   @JsonProperty(value = "weatherForecast")
   private List<Forecast> forecasts;
-  private LocalDateTime updateTime;
+  private String updateTime;
   private SeaTemp seaTemp;
 
   @Getter
@@ -18,7 +18,7 @@ public class WeatherDTO {
     private String place;
     private Double value;
     private String unit;
-    private LocalDateTime recordTime;
+    private String recordTime;
   }
 
   @Getter
@@ -26,7 +26,7 @@ public class WeatherDTO {
     private String place;
     private Double value;
     private String unit;
-    private LocalDateTime recordTime;
+    private String recordTime;
     private Depth Depth;
 
     @Getter
