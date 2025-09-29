@@ -6,6 +6,7 @@ import com.bootcamp.demo.demo_database.model.User;
 public class UserMapper {
   public UserEntity map(User user) {
     return UserEntity.builder() //
+      .origUserId(user.getId()) //
       .name(user.getName()) //
       .username(user.getUsername()) //
       .email(user.getEmail()) //

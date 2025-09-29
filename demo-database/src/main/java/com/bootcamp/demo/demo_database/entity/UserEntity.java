@@ -1,23 +1,29 @@
 package com.bootcamp.demo.demo_database.entity;
 
-import com.bootcamp.demo.demo_database.model.User.Address.Company;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserEntity {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id // ! Primary Key
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // ! auto_increment
   private Long id;
+
+  private Long origUserId; // ! Original User Id
+
   // No @Column means default table name
   private String name;
   private String username;

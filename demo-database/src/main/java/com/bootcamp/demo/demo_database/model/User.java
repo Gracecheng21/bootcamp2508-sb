@@ -1,6 +1,5 @@
 package com.bootcamp.demo.demo_database.model;
 
-import com.bootcamp.demo.demo_database.model.User.Address.Company;
 import lombok.Getter;
 
 @Getter
@@ -29,15 +28,12 @@ public class User {
       private String lat;
       private String lng;
     }
-
-    @Getter 
+  }
+@Getter 
     public static class Company {
       private String name;
       private String catchPhrase;
       private String bs;
     }
-
-  }
-
 
 }
