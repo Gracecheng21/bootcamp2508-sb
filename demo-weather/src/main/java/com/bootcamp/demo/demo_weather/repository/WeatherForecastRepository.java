@@ -1,11 +1,21 @@
 package com.bootcamp.demo.demo_weather.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.bootcamp.demo.demo_weather.entity.WeatherForecastEntity;
 
 @Repository
-public interface WeatherForecastRepository 
-    extends JpaRepository<WeatherForecastEntity, Long> {
-  
+public interface WeatherForecastRepository
+        extends JpaRepository<WeatherForecastEntity, Long> {
+
+    // ! Hibernate (Generate Class implementing this interface)
+    // Class
+    // method findByRequestId(); login DB (you provided id/pw), execute this SQL
+    @Query(value = "SELECT w.* FROM weather_forecasts w WHERE w.request_id = :request_id",
+            nativeQuery = true) // (value = "SQL syntax")
+    List<WeatherForecastEntity> findByRequestId(
+            @Param("request_id") Long request_id);
 }

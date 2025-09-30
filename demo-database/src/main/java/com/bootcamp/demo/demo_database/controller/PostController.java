@@ -31,6 +31,12 @@ public class PostController {
   @Autowired
   private UserRepository userRepository;
 
+  @Autowired
+  private RestTemplate restTemplate;
+
+  @Autowired 
+  private UserMapper userMapper;
+
   public static void main(String[] args) {
     String postUrl = UriComponentsBuilder.newInstance() //
         .scheme("https") //
@@ -61,14 +67,14 @@ public class PostController {
 
     // ! Call API for the data
     List<User> users =
-        Arrays.asList(new RestTemplate().getForObject(userURL, User[].class));
+        Arrays.asList(this.restTemplate.getForObject(userURL, User[].class));
     System.out.println("users=" + users);
     List<Post> posts =
-        Arrays.asList(new RestTemplate().getForObject(postUrl, Post[].class));
+        Arrays.asList(this.restTemplate.getForObject(postUrl, Post[].class));
 
     // ! Convert to List<UserEntity>
     List<UserEntity> userEntities = users.stream() //
-        .map(u -> new UserMapper().map(u)) //
+        .map(u -> this.userMapper.map(u)) //
         .collect(Collectors.toList());
 
     // ! Convert to List<PostEntity>

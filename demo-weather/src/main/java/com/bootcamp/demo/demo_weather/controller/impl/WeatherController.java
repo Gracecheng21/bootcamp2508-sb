@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bootcamp.demo.demo_weather.controller.WeatherOperation;
 import com.bootcamp.demo.demo_weather.dto.DayForecastDTO;
 import com.bootcamp.demo.demo_weather.entity.WeatherForecastEntity;
+import com.bootcamp.demo.demo_weather.mapper.ForecastMapper;
 import com.bootcamp.demo.demo_weather.model.dto.WeatherDTO;
 import com.bootcamp.demo.demo_weather.service.ObservatoryService;
 
@@ -14,27 +15,31 @@ import com.bootcamp.demo.demo_weather.service.ObservatoryService;
 public class WeatherController implements WeatherOperation {
   @Autowired
   private ObservatoryService observatoryService;
-  
+  @Autowired
+  private ForecastMapper forecastMapper;
+
   @Override
   public List<DayForecastDTO> getNineDaysWeather() {
-    return null;
+    return this.observatoryService.findLastestForecast().stream() //
+        .map(e -> this.forecastMapper.map(e)) //
+        .collect(Collectors.toList());
   }
 
-    @Override
+  @Override
   public List<DayForecastDTO> saveWeatherForecasts() {
     WeatherDTO weatherDTO = this.observatoryService.getNineDaysWeather();
     List<WeatherForecastEntity> weatherForecastEntities =
         this.observatoryService.saveForecastWeather(weatherDTO);
     return weatherForecastEntities.stream() //
-      .map(e -> {
-        return DayForecastDTO.builder() //
-        .date(e.getDate()) //
-        .description(e.getDescription()) //
-        .week(e.getWeek()) //
-        .wind(e.getWind()) //
-        .maxTemp(e.getMaxTemp()) //
-        .minTemp(e.getMinTemp()) //
-        .build();
-      }).collect(Collectors.toList());
+        .map(e -> {
+          return DayForecastDTO.builder() // same as ForecastMapper()
+              .date(e.getDate()) //
+              .description(e.getDescription()) //
+              .week(e.getWeek()) //
+              .wind(e.getWind()) //
+              .maxTemp(e.getMaxTemp()) //
+              .minTemp(e.getMinTemp()) //
+              .build();
+        }).collect(Collectors.toList());
   }
 }

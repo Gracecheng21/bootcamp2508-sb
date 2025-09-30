@@ -2,6 +2,7 @@ package com.bootcamp.demo.demo_weather.model.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -10,7 +11,8 @@ public class WeatherDTO {
   private String generalSituation;
   @JsonProperty(value = "weatherForecast")
   private List<Forecast> forecasts;
-  private String updateTime;
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+  private LocalDateTime updateTime;
   private SeaTemp seaTemp;
 
   @Getter
@@ -18,7 +20,8 @@ public class WeatherDTO {
     private String place;
     private Double value;
     private String unit;
-    private String recordTime;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+    private LocalDateTime recordTime;
   }
 
   @Getter
@@ -26,7 +29,8 @@ public class WeatherDTO {
     private String place;
     private Double value;
     private String unit;
-    private String recordTime;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+    private LocalDateTime recordTime;
     private Depth Depth;
 
     @Getter
